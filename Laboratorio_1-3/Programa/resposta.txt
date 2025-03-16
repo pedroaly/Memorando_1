@@ -1,0 +1,31 @@
+a) Crie o ficheiro Makefile na sua á rea de trabalho e execute make. O que
+aconteceu?
+R: Compilou o programa, executando os comandos gcc -g -c main.c, gcc -g -c list.c, depois linkou os arquivos .o que foram compilados.
+
+b) Apague o ficheiro list.o. Re-execute make. Interprete o sucedido.
+R: Como o arquivo list.o foi apagado, ao executar o comando make novamente, ele verifica que o arquivo objeto não está presente e, portanto, recompila o arquivo list.c para gerar o arquivo list.o novamente.
+O Makefile possui dependências definidas na regra main, que dependem dos arquivos list.o e main.o. Sempre que um arquivo objeto (.o) necessário estiver ausente ou desatualizado, o make executa a regra correspondente para gerá-lo antes de criar o executável final.
+
+c) Simule uma alteração ao ficheiro main.c com o comando seguinte e re-
+execute make. Compreenda o resultado.
+R: Aconteceu algo parecido com a resposta anterior. O make percebeu que o arquivo main.c foi alterado e, por isso, recompilou apenas a dependência main.o para gerar um novo arquivo objeto atualizado. Em seguida linkou os arquivos object(.o).
+
+d) Simule a alteração do ficheiro list.h e execute make. Porque razão todos os
+ficheiros foram gerados?
+R:Quando altera-se um arquivo de cabeçalho, o Makefile recompila todos os arquivos que dependem desse cabeçalho, assim sendo foram recompilados o main.c o eo list.c e depois linkados novamente. 
+
+e) Simule a alteração do ficheiro list.o. O que acontece quando faz make
+list.o? E se agora fizer make?
+R:Quando executamos make list.o, o make verifica as dependências e, como houve alteração no list.c, recompila o arquivo com os dados atualizados do list.h e não relinka. Se rodarmos apenas make, ele vai relinkar não vai executar as dependências.
+
+g) Adicione a regra seguinte no fim do ficheiro. O que descreve esta regra?
+Identifique: o alvo, as dependências e o comando.
+R: Regra ou Alvode descreve o seguinte.
+Um comando que apaga todos os arquivos do forma .o e o arquivo executavel main.
+    Alvo: clean.
+    Dependenciais: nenhuma
+
+h) Execute make clean. O que aconteceu? Porque razão o comando é
+executado sempre que esta regra é invocada explicitamente?
+R: Apagou os arquivos de formato .o e o arquivo main.
+    Ele e acontece sempre que chamamos a regra clean explicitamente.
